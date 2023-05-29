@@ -8,7 +8,9 @@ import com.example.schoolapi.repository.StudentRepository;
 import com.example.schoolapi.repository.TeacherRepository;
 import com.example.schoolapi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class StudentService {
@@ -48,6 +50,10 @@ public class StudentService {
     }
     student.setEducationId(educationId);
     student.getTeacherIds().addAll(education.getTeacherId());
+    education.getStudentId().add(id);
+    educationRepository.save(education);
     return studentRepository.save(student);
   }
+
+
 }

@@ -34,6 +34,7 @@ public LoadDataService(EducationRepository educationRepository, RoleRepository r
 
     educations.add(new Education("Java"));
     educations.add(new Education("C#"));
+    educations.add(new Education("Javascript"));
 
     educationRepository.saveAll(educations);
   }

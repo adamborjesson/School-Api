@@ -29,4 +29,8 @@ public class TeacherService {
     teacher.getStudentId().addAll(education.getStudentId());
     return teacherRepository.save(teacher);
   }
+
+  public Teacher getTeacher(Long teacherId) {
+    return teacherRepository.findById(teacherId).get();
+  }
 }
