@@ -1,8 +1,10 @@
 package com.example.schoolapi.controller;
 
+import com.example.schoolapi.dto.EducationDto;
 import com.example.schoolapi.model.Education;
 import com.example.schoolapi.service.EducationService;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +39,10 @@ public class EducationController {
   }
 
   @GetMapping("/get/all")
-  public ResponseEntity<List<Education>> getAllEducations() {
-    return ResponseEntity.ok().body(educationService.getAllEducations());
+  public ResponseEntity<List<EducationDto>> getAllEducations() {
+    return ResponseEntity.ok().body(educationService.getAllEducations()
+        .stream()
+        .map(Education::getFullDto)
+        .collect(Collectors.toList()));
   }
 }

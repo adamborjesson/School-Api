@@ -1,5 +1,6 @@
 package com.example.schoolapi.controller.auth;
 
+import com.example.schoolapi.dto.StudentDto;
 import com.example.schoolapi.dto.StudentSignUpDto;
 import com.example.schoolapi.dto.TeacherSignUpDto;
 import com.example.schoolapi.model.Student;
@@ -23,9 +24,9 @@ public class RegistrationController {
   }
 
 @PostMapping("/register/student")
-  public Student registerStudent(@RequestBody StudentSignUpDto studentSignUpDto) {
-    Student student = registrationService.registerStudent(studentSignUpDto);
-    return student;
+  public StudentDto registerStudent(@RequestBody StudentSignUpDto studentSignUpDto) {
+    return registrationService.registerStudent(studentSignUpDto);
+
   }
 
 @PostMapping("register/teacher")

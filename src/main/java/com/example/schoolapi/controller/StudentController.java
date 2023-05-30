@@ -1,5 +1,6 @@
 package com.example.schoolapi.controller;
 
+import com.example.schoolapi.dto.StudentDto;
 import com.example.schoolapi.model.Student;
 import com.example.schoolapi.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class StudentController {
 
 
   @GetMapping("/get/{id}")
-  public ResponseEntity<Student> getStudent(@PathVariable Long id) {
+  public ResponseEntity<StudentDto> getStudent(@PathVariable Long id) {
     try {
       return ResponseEntity.ok().body(studentService.getStudent(id));
     } catch (Exception e) {
@@ -37,7 +38,7 @@ public class StudentController {
     }
   }
   @PutMapping("/add/education/{id}/{educationId}")
-  public ResponseEntity<Student> addEducation(@PathVariable Long id, @PathVariable Long educationId) {
+  public ResponseEntity<StudentDto> addEducation(@PathVariable Long id, @PathVariable Long educationId) {
     try {
       return ResponseEntity.ok().body(studentService.addEducation(id, educationId));
     } catch (Exception e) {

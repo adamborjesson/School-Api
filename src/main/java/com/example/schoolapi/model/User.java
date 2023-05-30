@@ -1,6 +1,7 @@
 package com.example.schoolapi.model;
 
 import com.example.schoolapi.dto.StudentSignUpDto;
+import com.example.schoolapi.dto.UserDto;
 import com.example.schoolapi.model.role.ERole;
 import com.example.schoolapi.model.role.Role;
 import jakarta.persistence.Entity;
@@ -32,5 +33,12 @@ public class User {
   public User(String email, String role) {
     this.email = email;
     this.role = role;
+  }
+
+  public UserDto getFullDto() {
+    return new UserDto(
+        this.getId(),
+        this.getEmail(),
+        this.getRole());
   }
 }

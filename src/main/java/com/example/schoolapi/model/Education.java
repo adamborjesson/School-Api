@@ -1,5 +1,6 @@
 package com.example.schoolapi.model;
 
+import com.example.schoolapi.dto.EducationDto;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,6 +29,17 @@ public class Education {
   private List<Long> studentId;
 
   public Education(String name) {
+
     this.name = name;
   }
+
+  public EducationDto getFullDto() {
+    return new EducationDto(
+        this.getId(),
+        this.getName(),
+        this.getTeacherId(),
+        this.getStudentId());
+  }
+
+
 }

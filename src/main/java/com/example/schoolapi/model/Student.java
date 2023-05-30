@@ -1,5 +1,6 @@
 package com.example.schoolapi.model;
 
+import com.example.schoolapi.dto.StudentDto;
 import com.example.schoolapi.dto.StudentSignUpDto;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
@@ -33,5 +34,14 @@ public class Student {
   public Student(StudentSignUpDto studentSignUpDto) {
     this.name = studentSignUpDto.getName();
     this.email = studentSignUpDto.getEmail();
+  }
+
+  public StudentDto getFullDTO() {
+    return new StudentDto(
+        this.getId(),
+        this.getUserId(),
+        this.getName(),
+        this.getEducationId(),
+        this.getTeacherIds());
   }
 }

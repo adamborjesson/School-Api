@@ -1,5 +1,6 @@
 package com.example.schoolapi.controller;
 
+import com.example.schoolapi.dto.TeacherDto;
 import com.example.schoolapi.model.Teacher;
 import com.example.schoolapi.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class TeacherController {
   }
 
   @PutMapping("/add/education/{teacherId}/{educationId}")
-  public ResponseEntity<Teacher> addEducation(@PathVariable Long teacherId, @PathVariable Long educationId) {
+  public ResponseEntity<TeacherDto> addEducation(@PathVariable Long teacherId, @PathVariable Long educationId) {
     try {
       return ResponseEntity.ok().body(teacherService.addEducation(teacherId, educationId));
     }catch (Exception e) {
@@ -35,7 +36,7 @@ public class TeacherController {
   }
 
   @GetMapping("/get/{teacherId}")
-  public ResponseEntity<Teacher> getTeacher(@PathVariable Long teacherId) {
+  public ResponseEntity<TeacherDto> getTeacher(@PathVariable Long teacherId) {
     try {
       return ResponseEntity.ok().body(teacherService.getTeacher(teacherId));
     } catch (Exception e) {

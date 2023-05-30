@@ -1,5 +1,6 @@
 package com.example.schoolapi.service;
 
+import com.example.schoolapi.dto.EducationDto;
 import com.example.schoolapi.model.Education;
 import com.example.schoolapi.model.Student;
 import com.example.schoolapi.repository.EducationRepository;

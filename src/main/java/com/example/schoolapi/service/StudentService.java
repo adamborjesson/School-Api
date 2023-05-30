@@ -1,5 +1,6 @@
 package com.example.schoolapi.service;
 
+import com.example.schoolapi.dto.StudentDto;
 import com.example.schoolapi.model.Education;
 import com.example.schoolapi.model.Student;
 import com.example.schoolapi.model.Teacher;
@@ -35,12 +36,12 @@ public class StudentService {
 //    return studentRepository.save(student);
 //  }
 
-  public Student getStudent(Long id) {
+  public StudentDto getStudent(Long id) {
     Student student = studentRepository.findById(id).get();
-    return student;
+    return student.getFullDTO();
   }
 
-  public Student addEducation(Long id, Long educationId) {
+  public StudentDto addEducation(Long id, Long educationId) {
     Student student = studentRepository.findById(id).get();
     Education education = educationRepository.findById(educationId).get();
     for(Long teacherId:education.getTeacherId()) {
@@ -52,7 +53,7 @@ public class StudentService {
     student.getTeacherIds().addAll(education.getTeacherId());
     education.getStudentId().add(id);
     educationRepository.save(education);
-    return studentRepository.save(student);
+    return studentRepository.save(student).getFullDTO();
   }
 
 

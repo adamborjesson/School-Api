@@ -1,15 +1,14 @@
 package com.example.schoolapi.dto;
 
-
 import java.util.List;
 import lombok.Value;
 
 @Value
-public class StudentDto {
+public class TeacherDto {
   Long id;
-  Long UserId;
+  Long userId;
   String name;
-  Long educationId;
-  List<Long> teacherIds;
-
+  String email;
+  List<Long> educationId;
+  List<Long> studentId;
 }
