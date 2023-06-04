@@ -2,6 +2,7 @@ package com.example.schoolapi.service.auth;
 
 import com.example.schoolapi.dto.StudentDto;
 import com.example.schoolapi.dto.StudentSignUpDto;
+import com.example.schoolapi.dto.TeacherDto;
 import com.example.schoolapi.dto.TeacherSignUpDto;
 import com.example.schoolapi.model.Student;
 import com.example.schoolapi.model.Teacher;
@@ -46,7 +47,7 @@ public class RegistrationService {
     return studentRepository.save(student).getFullDTO();
   }
 
-  public Teacher registerTeacher(TeacherSignUpDto teacherSignUpDto) {
+  public TeacherDto registerTeacher(TeacherSignUpDto teacherSignUpDto) {
     Teacher teacher = new Teacher(teacherSignUpDto);
     Role role = roleRepository.findByName(ERole.TEACHER).get();
     User user = new User(teacherSignUpDto.getEmail(), role.getName().toString());
@@ -54,6 +55,6 @@ public class RegistrationService {
 
     teacher.setUserId(user.getId());
 
-    return teacherRepository.save(teacher);
+    return teacherRepository.save(teacher).getFullDto();
   }
 }

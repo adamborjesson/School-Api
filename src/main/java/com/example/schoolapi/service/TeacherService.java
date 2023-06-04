@@ -23,11 +23,14 @@ public class TeacherService {
 
   public TeacherDto addEducation(Long teacherId, Long educationId) {
     Teacher teacher = teacherRepository.findById(teacherId).get();
-    teacher.getEducationId().add(educationId);
     Education education = educationRepository.findById(educationId).get();
-    education.getTeacherId().add(teacherId);
+    if(!teacher.getEducationId().contains(educationId)) {
+      teacher.getEducationId().add(educationId);
+      education.getTeacherId().add(teacherId);
+      teacher.getStudentId().addAll(education.getStudentId());
+    }
     educationRepository.save(education);
-    teacher.getStudentId().addAll(education.getStudentId());
+
     return teacherRepository.save(teacher).getFullDto();
   }
 

@@ -31,11 +31,9 @@ public class StudentController {
 
   @GetMapping("/get/{id}")
   public ResponseEntity<StudentDto> getStudent(@PathVariable Long id) {
-    try {
+
       return ResponseEntity.ok().body(studentService.getStudent(id));
-    } catch (Exception e) {
-      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student could not be found");
-    }
+    
   }
   @PutMapping("/add/education/{id}/{educationId}")
   public ResponseEntity<StudentDto> addEducation(@PathVariable Long id, @PathVariable Long educationId) {

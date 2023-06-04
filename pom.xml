@@ -9,9 +9,6 @@
     <version>3.1.0</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
-
-
-
   <groupId>com.example</groupId>
   <artifactId>School-Api</artifactId>
   <version>0.0.1-SNAPSHOT</version>
@@ -58,35 +55,6 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
-<!--    <dependency>-->
-<!--      <groupId>org.springframework.boot</groupId>-->
-<!--      <artifactId>spring-boot-starter-security</artifactId>-->
-<!--    </dependency>-->
-<!--    <dependency>-->
-<!--      <groupId>org.springframework.security</groupId>-->
-<!--      <artifactId>spring-security-config</artifactId>-->
-<!--      <version>6.1.0</version> &lt;!&ndash; Replace with the desired version &ndash;&gt;-->
-<!--    </dependency>-->
-<!--    <dependency>-->
-<!--      <groupId>org.springframework.security</groupId>-->
-<!--      <artifactId>spring-security-web</artifactId>-->
-<!--      <version>6.1.0</version>-->
-<!--    </dependency>-->
-<!--    <dependency>-->
-<!--      <groupId>javax.servlet</groupId>-->
-<!--      <artifactId>javax.servlet-api</artifactId>-->
-<!--      <version>4.0.1</version> &lt;!&ndash; Replace with the desired version &ndash;&gt;-->
-<!--      <scope>provided</scope>-->
-<!--    </dependency>-->
-
-
-
-
-
-
-
-
-
   </dependencies>
 
   <build>

@@ -15,6 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class StudentService {
+
   private final StudentRepository studentRepository;
   private final UserRepository userRepository;
   private final EducationRepository educationRepository;
@@ -37,24 +38,28 @@ public class StudentService {
 //  }
 
   public StudentDto getStudent(Long id) {
-    Student student = studentRepository.findById(id).get();
-    return student.getFullDTO();
+    if (studentRepository.findById(id).isPresent()) {
+      return studentRepository.findById(id).get().getFullDTO();
+    }
+    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student could not be found");
   }
 
   public StudentDto addEducation(Long id, Long educationId) {
     Student student = studentRepository.findById(id).get();
     Education education = educationRepository.findById(educationId).get();
-    for(Long teacherId:education.getTeacherId()) {
+    for (Long teacherId : education.getTeacherId()) {
       Teacher teacher = teacherRepository.findById(teacherId).get();
-      teacher.getStudentId().add(id);
-      teacherRepository.save(teacher);
+      if (!teacher.getStudentId().contains(id)) {
+        teacher.getStudentId().add(id);
+        teacherRepository.save(teacher);
+        student.getTeacherIds().addAll(education.getTeacherId());
+      }
+      if (student.getEducationId() == null) {
+        student.setEducationId(educationId);
+        education.getStudentId().add(id);
+      }
+      educationRepository.save(education);
     }
-    student.setEducationId(educationId);
-    student.getTeacherIds().addAll(education.getTeacherId());
-    education.getStudentId().add(id);
-    educationRepository.save(education);
     return studentRepository.save(student).getFullDTO();
   }
-
-
 }
