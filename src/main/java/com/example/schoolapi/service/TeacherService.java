@@ -5,6 +5,7 @@ import com.example.schoolapi.model.Education;
 import com.example.schoolapi.model.Teacher;
 import com.example.schoolapi.repository.EducationRepository;
 import com.example.schoolapi.repository.TeacherRepository;
+import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,10 @@ public class TeacherService {
   public TeacherDto addEducation(Long teacherId, Long educationId) {
     Teacher teacher = teacherRepository.findById(teacherId).get();
     Education education = educationRepository.findById(educationId).get();
+    if(teacher.getEducationId() == null) {
+      teacher.setEducationId(new ArrayList<>());
+      teacherRepository.save(teacher);
+    }
     if(!teacher.getEducationId().contains(educationId)) {
       teacher.getEducationId().add(educationId);
       education.getTeacherId().add(teacherId);

@@ -35,15 +35,16 @@ public class EducationService {
     this.lessonRepository = classRepository;
   }
 
-  public void terminateStudent(Long educationId, Long studentId) {
+  public String terminateStudent(Long educationId, Long studentId) {
     if(educationRepository.findById(educationId).isPresent()) {
       Education education = educationRepository.findById(educationId).get();
+
       if(education.getStudentId().contains(studentId)) {
         System.out.println(1);
         education.getStudentId().remove(studentId);
         System.out.println(2);
         educationRepository.save(education);
-        return;
+        return "Student is terminated";
       }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student was not found in this education");
     }
@@ -60,6 +61,7 @@ public class EducationService {
   public LessonBookedDto bookLesson(Long teacherId, LessonDto classDto) {
     if(teacherRepository.findById(teacherId).isPresent()) {
       Teacher teacher =  teacherRepository.findById(teacherId).get();
+
       if(teacher.getEducationId().contains(classDto.getEducationId())) {
         Lesson lesson = new Lesson(classDto);
         return lessonRepository.save(lesson).getFullDto();
@@ -73,6 +75,7 @@ public class EducationService {
   public LessonBookedDto startLesson(Long lessonId) {
     if(lessonRepository.findById(lessonId).isPresent()) {
       Lesson lesson = lessonRepository.findById(lessonId).get();
+
       if(lesson.getState() == ELesson.BOOKED) {
         lesson.setState(ELesson.STARTED);
         return lessonRepository.save(lesson).getFullDto();
@@ -85,6 +88,7 @@ public class EducationService {
   public LessonBookedDto finishLesson(Long lessonId) {
     if(lessonRepository.findById(lessonId).isPresent()) {
       Lesson lesson = lessonRepository.findById(lessonId).get();
+
       if(lesson.getState() == ELesson.STARTED) {
         lesson.setState(ELesson.FINISHED);
         return lessonRepository.save(lesson).getFullDto();

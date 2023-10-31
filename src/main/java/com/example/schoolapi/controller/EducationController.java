@@ -30,9 +30,9 @@ public class EducationController {
 
   @PutMapping("/terminate/student/{educationId}/{studentId}")
   public ResponseEntity<String> terminateStudent(@PathVariable Long educationId, @PathVariable Long studentId) {
-      educationService.terminateStudent(educationId, studentId);
+      String message = educationService.terminateStudent(educationId, studentId);
 
-    return ResponseEntity.ok().body("Student is terminated");
+    return ResponseEntity.ok().body(message);
   }
 
   @GetMapping("/get/all")

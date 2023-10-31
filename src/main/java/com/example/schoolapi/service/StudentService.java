@@ -8,6 +8,7 @@ import com.example.schoolapi.repository.EducationRepository;
 import com.example.schoolapi.repository.StudentRepository;
 import com.example.schoolapi.repository.TeacherRepository;
 import com.example.schoolapi.repository.UserRepository;
+import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -44,19 +45,21 @@ public class StudentService {
     throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student could not be found");
   }
 
-  public StudentDto addEducation(Long id, Long educationId) {
-    Student student = studentRepository.findById(id).get();
+  public StudentDto addEducation(Long studentId, Long educationId) {
+    Student student = studentRepository.findById(studentId).get();
     Education education = educationRepository.findById(educationId).get();
+
     for (Long teacherId : education.getTeacherId()) {
       Teacher teacher = teacherRepository.findById(teacherId).get();
-      if (!teacher.getStudentId().contains(id)) {
-        teacher.getStudentId().add(id);
+
+      if (!teacher.getStudentId().contains(studentId)) {
+        teacher.getStudentId().add(studentId);
         teacherRepository.save(teacher);
         student.getTeacherIds().addAll(education.getTeacherId());
       }
       if (student.getEducationId() == null) {
         student.setEducationId(educationId);
-        education.getStudentId().add(id);
+        education.getStudentId().add(studentId);
       }
       educationRepository.save(education);
     }
